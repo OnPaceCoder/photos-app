@@ -2,14 +2,16 @@ import { CldImage } from "next-cloudinary";
 import UploadButton from "./upload-button";
 import cloudinary from "cloudinary";
 import { CloudinaryImage } from "./cloudinary-image";
-type SearchResult = {
+export type SearchResult = {
   public_id: string;
+  tags: string[];
 };
 
 const page = async () => {
   const results = (await cloudinary.v2.search
     .expression("resource_type:image ")
     .sort_by("created_at", "desc")
+    .with_field("tags")
     .max_results(10)
     .execute()) as { resources: SearchResult[] };
 
@@ -26,6 +28,8 @@ const page = async () => {
             <CloudinaryImage
               key={result.public_id}
               src={result.public_id}
+              public_id={result.public_id}
+              imageData={result}
               alt="an image of something"
               height="300"
               width="400"
