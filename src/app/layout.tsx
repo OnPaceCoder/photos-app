@@ -6,6 +6,7 @@ import { Inter } from "next/font/google";
 import Image from "next/image";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import Heart from "@/components/icons/heart";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -75,7 +76,10 @@ function SideMenu() {
               variant="ghost"
               className="w-full justify-start flex gap-2"
             >
-              <Link href="/favorites">Favorites</Link>
+              <div>
+                <Heart />
+                <Link href="/favourites">Favourites</Link>
+              </div>
             </Button>
           </div>
         </div>
